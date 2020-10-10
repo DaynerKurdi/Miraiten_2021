@@ -1,0 +1,33 @@
+{
+    "name": "inputTest",
+    "maps": [
+        {
+            "name": "test",
+            "id": "9fdda555-7730-4bd3-9acb-831cba1fba1b",
+            "actions": [
+                {
+                    "name": "action",
+                    "type": "Button",
+                    "id": "55c486b9-7443-484a-86ad-b672e3e6b363",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b7db1d18-349f-49a8-86f6-8e8867004199",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
