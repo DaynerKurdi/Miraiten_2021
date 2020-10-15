@@ -9,7 +9,7 @@ public class GM00_GAME_MANAGER : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -17,6 +17,40 @@ public class GM00_GAME_MANAGER : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 10, 100, 30), "Change Scene"))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            int currentSceneIndex = currentScene.buildIndex;
+
+            Debug.Log("Scene loading: ");
+
+            switch (currentSceneIndex)
+            {
+
+                case 0:
+                    {
+                        SceneManager.LoadScene(1);
+                    }
+                    break;
+
+                case 1:
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                    break;
+
+                case 2:
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                    break;
+            }
+            
         }
     }
 }
