@@ -1,0 +1,107 @@
+{
+    "name": "INPUT_CONTROLER",
+    "maps": [
+        {
+            "name": "TITLE_MENU",
+            "id": "0a1258d9-3759-4ba1-9cc6-8d13e59908c1",
+            "actions": [
+                {
+                    "name": "SELECTION",
+                    "type": "Button",
+                    "id": "1e69a76a-c212-4b78-a7a1-70afb9e29437",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "DECISON",
+                    "type": "Button",
+                    "id": "b6c4e4ee-6e25-4a37-9211-e26687cdf0dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "WS_KEYS",
+                    "id": "bcd44d10-7486-4a83-8396-f5e022c1d1d5",
+                    "path": "1DAxis",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "17f42355-a4f0-4b88-8377-0161f464458d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1953fab7-41bf-4642-9035-a1ee1fade653",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "ARROW_KEYS",
+                    "id": "ff1d4c86-af36-493b-90cd-106b19ad6fd3",
+                    "path": "1DAxis",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "6289edd4-4b64-49ea-94a2-54fd464683c3",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b8c76aeb-81fc-4413-9403-643d0e1f8f08",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SELECTION",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a0d02c79-7d17-41ef-be66-10ebec82e07f",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DECISON",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

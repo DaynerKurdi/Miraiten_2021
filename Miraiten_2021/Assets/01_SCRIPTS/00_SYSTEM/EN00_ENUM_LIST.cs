@@ -1,0 +1,6 @@
+﻿public enum GS_GAME_SENCE
+{
+    GS00_TITLE_SENCE,
+    GS01_MAIN_GAME,
+    GS02_GAME_RESULT
+}
