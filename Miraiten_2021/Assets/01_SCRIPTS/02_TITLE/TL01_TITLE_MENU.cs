@@ -19,6 +19,8 @@ public class TL01_TITLE_MENU : MonoBehaviour
     bool downButtonFlag = false;
     bool actionButtonFlag = false;
 
+    bool buttonHasSelectedFlag = false;
+
     private void Start()
     {
         buttonIndex = ButtonIndex.BT00_START;
@@ -27,21 +29,33 @@ public class TL01_TITLE_MENU : MonoBehaviour
 
         currentLerp = 0;
 
+        buttonHasSelectedFlag = false;
+
         ResetButtonFlag();
 
+        IP00_INPUT_MANAGER.instance.ActionTriggredEvent += SetActionFlagOn;
         IP00_INPUT_MANAGER.instance.UpButtonTriggredEvent += SetUpButtonFlagOn;
         IP00_INPUT_MANAGER.instance.DownButtonTriggredEvent += SetDownButtonFlagOn;
     }
 
     private void OnDisable()
     {
+        IP00_INPUT_MANAGER.instance.ActionTriggredEvent -= SetActionFlagOn;
         IP00_INPUT_MANAGER.instance.UpButtonTriggredEvent -= SetUpButtonFlagOn;
         IP00_INPUT_MANAGER.instance.DownButtonTriggredEvent -= SetDownButtonFlagOn;
     }
 
     private void Update()
     {
-        TitleFlashingProsses();
+        if (!buttonHasSelectedFlag)
+        {
+            TitleFlashingProsses();
+        }
+        else
+        {
+
+        }
+       
     }
 
     void TitleFlashingProsses()
@@ -50,7 +64,13 @@ public class TL01_TITLE_MENU : MonoBehaviour
         {
             case ButtonIndex.BT00_START:
                 {
-                    if (upButtonFlag)
+                    if (actionButtonFlag)
+                    {
+                        SetActiveButtonOn(0);
+
+                        ResetButtonFlag();
+                    }
+                    else if (upButtonFlag)
                     {
                         SetNextButton(ButtonIndex.BT03_EXIT);
 
@@ -68,7 +88,13 @@ public class TL01_TITLE_MENU : MonoBehaviour
                 break;
             case ButtonIndex.BT01_BUTTON_TWO:
                 {
-                    if (upButtonFlag)
+                    if (actionButtonFlag)
+                    {
+                        SetActiveButtonOn(1);
+
+                        ResetButtonFlag();
+                    }
+                    else if(upButtonFlag)
                     {
                         SetNextButton(ButtonIndex.BT00_START);
 
@@ -86,7 +112,13 @@ public class TL01_TITLE_MENU : MonoBehaviour
                 break;
             case ButtonIndex.BT03_EXIT:
                 {
-                    if (upButtonFlag)
+                    if (actionButtonFlag)
+                    {
+                        SetActiveButtonOn(2);
+
+                        ResetButtonFlag();
+                    }
+                    else if(upButtonFlag)
                     {
                         SetNextButton(ButtonIndex.BT01_BUTTON_TWO);
 
@@ -110,6 +142,23 @@ public class TL01_TITLE_MENU : MonoBehaviour
         upButtonFlag = false;
         downButtonFlag = false;
         actionButtonFlag = false;
+    }
+
+    void SetActiveButtonOn(int index)
+    {
+        buttonHasSelectedFlag = true;
+
+        for (int i = 0; i < titleButton.Length; i++)
+        {
+            if (i != index)
+            {
+                titleButton[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                titleButton[i].SetStopLerpFlagOn();
+            }
+        }
     }
 
     void SetNextButton(ButtonIndex nextIndex)
@@ -173,6 +222,10 @@ public class TL01_TITLE_MENU : MonoBehaviour
         }
     }
 
+    void SetActionFlagOn()
+    {
+        actionButtonFlag = true;
+    }
 
     void SetUpButtonFlagOn()
     {

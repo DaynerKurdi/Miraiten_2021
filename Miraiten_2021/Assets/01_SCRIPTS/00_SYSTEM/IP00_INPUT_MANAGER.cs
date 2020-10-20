@@ -10,9 +10,11 @@ public class IP00_INPUT_MANAGER : MonoBehaviour
 
     INPUT_CONTROLER inputControler;
 
+    public delegate void ActionTriggredDelagate();
     public delegate void UpButtonTriggredDelagate();
     public delegate void DownButtomTriggredDelagate();
 
+    public ActionTriggredDelagate ActionTriggredEvent;
     public UpButtonTriggredDelagate UpButtonTriggredEvent;
     public DownButtomTriggredDelagate DownButtonTriggredEvent;
 
@@ -32,19 +34,23 @@ public class IP00_INPUT_MANAGER : MonoBehaviour
 
     private void OnEnable()
     {
-        inputControler.TITLE_MENU.SELECTION.performed += checkSelectionInput;
+        inputControler.TITLE_MENU.DECISON.performed += CheckActionInput;
+        inputControler.TITLE_MENU.SELECTION.performed += CheckSelectionInput;
 
+        inputControler.TITLE_MENU.DECISON.Enable();
         inputControler.TITLE_MENU.SELECTION.Enable();
     }
 
     private void OnDisable()
     {
-        inputControler.TITLE_MENU.SELECTION.performed -= checkSelectionInput;
+        inputControler.TITLE_MENU.DECISON.performed -= CheckActionInput;
+        inputControler.TITLE_MENU.SELECTION.performed -= CheckSelectionInput;
 
+        inputControler.TITLE_MENU.DECISON.Disable();
         inputControler.TITLE_MENU.SELECTION.Disable();
     }
 
-    private void checkSelectionInput(InputAction.CallbackContext inputContext)
+    private void CheckSelectionInput(InputAction.CallbackContext inputContext)
     {
         float GetInput = inputContext.ReadValue<float>();
 
@@ -56,6 +62,11 @@ public class IP00_INPUT_MANAGER : MonoBehaviour
         {
             DownButtonTriggredEvent?.Invoke();
         }
+    }
+
+    private void CheckActionInput(InputAction.CallbackContext inputContext)
+    {
+        ActionTriggredEvent?.Invoke();
     }
 
 }

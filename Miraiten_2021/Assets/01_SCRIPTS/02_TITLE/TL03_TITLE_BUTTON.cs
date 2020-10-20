@@ -14,8 +14,8 @@ public class TL03_TITLE_BUTTON : MonoBehaviour
 
     float maxTimeLerp = 0.4f;
 
-    bool lerpFlag;
     int flashIndex = 0;
+    bool stopLerpFlag = false;
 
     private void Awake()
     {
@@ -30,6 +30,8 @@ public class TL03_TITLE_BUTTON : MonoBehaviour
         endLerp = endColor;
 
         flashIndex = 0;
+
+        stopLerpFlag = false;
 
         SetHighLightFlagOff();
     }
@@ -50,20 +52,28 @@ public class TL03_TITLE_BUTTON : MonoBehaviour
             startLerp = endColor;
             endLerp = startColor;
         }
-
-        lerpFlag = true;
     }
 
     public int SetHighLightFlagOff()
     {
         uiEffect.gameObject.SetActive(false);
-        lerpFlag = false;
 
         return flashIndex;
     }
 
+    public void SetStopLerpFlagOn()
+    {
+        stopLerpFlag = true;
+        uiEffect.color = startColor;
+    }
+
     public bool LerpProcess(float currentLerpTime)
     {
+        if (stopLerpFlag)
+        {
+            return false;
+        }
+
         float t = currentLerpTime / maxTimeLerp;
         if (t >=1)
         {
