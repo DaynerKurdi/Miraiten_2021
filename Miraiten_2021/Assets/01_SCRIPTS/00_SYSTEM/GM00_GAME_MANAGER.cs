@@ -27,6 +27,11 @@ public class GM00_GAME_MANAGER : MonoBehaviour
         }
     }
 
+    public void SetSenceToMainGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
 
     //void OnGUI()
     //{

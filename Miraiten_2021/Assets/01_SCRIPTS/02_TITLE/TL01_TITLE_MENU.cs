@@ -45,17 +45,12 @@ public class TL01_TITLE_MENU : MonoBehaviour
         IP00_INPUT_MANAGER.instance.DownButtonTriggredEvent -= SetDownButtonFlagOn;
     }
 
-    private void Update()
+    public void UpdateScript()
     {
         if (!buttonHasSelectedFlag)
         {
             TitleFlashingProsses();
         }
-        else
-        {
-
-        }
-       
     }
 
     void TitleFlashingProsses()
@@ -69,6 +64,8 @@ public class TL01_TITLE_MENU : MonoBehaviour
                         SetActiveButtonOn(0);
 
                         ResetButtonFlag();
+
+                        GM00_GAME_MANAGER.instance.SetSenceToMainGame();
                     }
                     else if (upButtonFlag)
                     {

@@ -8,7 +8,6 @@ public class TL02_TITLE_EFFECT : MonoBehaviour
     RectTransform baseChild;
     RectTransform[] effectChild = new RectTransform[3];
 
-    [SerializeField]
     bool startEffect;
     int effectIndex;
     int currentNumberOfEffectRound = 0;
@@ -49,8 +48,7 @@ public class TL02_TITLE_EFFECT : MonoBehaviour
         currentNumberOfEffectRound = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScript()
     {
         if (startEffect)
         {
@@ -71,10 +69,10 @@ public class TL02_TITLE_EFFECT : MonoBehaviour
             if (effectIndex >= effectChild.Length)
             {
                 effectIndex = 0;
-                if (currentNumberOfEffectRound == maxWaitTimeBeforeSwitch)
+                if (currentNumberOfEffectRound == maxNumberOfEffectRound)
                 {
                     currentNumberOfEffectRound = 0;
-                    startEffect = false;
+                    SetScraperEffectOff();
                 }
                 else
                 {
@@ -82,7 +80,10 @@ public class TL02_TITLE_EFFECT : MonoBehaviour
                 }
             }
 
-            effectChild[effectIndex].gameObject.SetActive(true);
+            if (startEffect)
+            {
+                effectChild[effectIndex].gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -98,5 +99,18 @@ public class TL02_TITLE_EFFECT : MonoBehaviour
         currentNumberOfEffectRound = 0;
         baseChild.gameObject.SetActive(false);
         effectChild[effectIndex].gameObject.SetActive(true);
+    }
+
+    public void SetScraperEffectOff()
+    {
+        startEffect = false;
+        effectIndex = 0;
+        currentWaitTimeBeforeSwitch = 0;
+        currentNumberOfEffectRound = 0;
+        baseChild.gameObject.SetActive(true);
+
+        effectChild[0].gameObject.SetActive(false);
+        effectChild[1].gameObject.SetActive(false);
+        effectChild[2].gameObject.SetActive(false);
     }
 }
