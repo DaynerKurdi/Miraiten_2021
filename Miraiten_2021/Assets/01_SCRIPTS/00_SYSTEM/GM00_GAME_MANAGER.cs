@@ -5,14 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GM00_GAME_MANAGER : MonoBehaviour
 {
-    public enum GM_GAME_SCENE
-    {
-        GM00_TITLE,
-        GM01_MAIN_GAME,
-        GM02_GAME_RESULT
-    }
-
     public static GM00_GAME_MANAGER instance;
+
+    public GS_GAME_SENCE currentGameSence;
+
+   
    
     private void Awake()
     {
@@ -29,6 +26,7 @@ public class GM00_GAME_MANAGER : MonoBehaviour
 
     public void SetSenceToMainGame()
     {
+        currentGameSence = GS_GAME_SENCE.GS01_MAIN_GAME;
         SceneManager.LoadScene(1);
     }
 

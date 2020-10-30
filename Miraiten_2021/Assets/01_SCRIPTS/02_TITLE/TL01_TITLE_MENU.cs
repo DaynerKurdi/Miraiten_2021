@@ -32,17 +32,20 @@ public class TL01_TITLE_MENU : MonoBehaviour
         buttonHasSelectedFlag = false;
 
         ResetButtonFlag();
+    }
 
-        IP00_INPUT_MANAGER.instance.ActionTriggredEvent += SetActionFlagOn;
-        IP00_INPUT_MANAGER.instance.UpButtonTriggredEvent += SetUpButtonFlagOn;
-        IP00_INPUT_MANAGER.instance.DownButtonTriggredEvent += SetDownButtonFlagOn;
+    private void OnEnable()
+    {
+        IP00_INPUT_MANAGER.instance.TitleActionTriggredEvent += SetActionFlagOn;
+        IP00_INPUT_MANAGER.instance.TitleUpButtonTriggredEvent += SetUpButtonFlagOn;
+        IP00_INPUT_MANAGER.instance.TitleDownButtonTriggredEvent += SetDownButtonFlagOn;
     }
 
     private void OnDisable()
     {
-        IP00_INPUT_MANAGER.instance.ActionTriggredEvent -= SetActionFlagOn;
-        IP00_INPUT_MANAGER.instance.UpButtonTriggredEvent -= SetUpButtonFlagOn;
-        IP00_INPUT_MANAGER.instance.DownButtonTriggredEvent -= SetDownButtonFlagOn;
+        IP00_INPUT_MANAGER.instance.TitleActionTriggredEvent -= SetActionFlagOn;
+        IP00_INPUT_MANAGER.instance.TitleUpButtonTriggredEvent -= SetUpButtonFlagOn;
+        IP00_INPUT_MANAGER.instance.TitleDownButtonTriggredEvent -= SetDownButtonFlagOn;
     }
 
     public void UpdateScript()
