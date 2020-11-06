@@ -12,7 +12,7 @@ public class CM01_CAMERA_LERP : MonoBehaviour
     Vector3 end;
 
     float currentTimeLerp;
-    float maxLerpTime = 1;
+    float maxLerpTime = 0.5f;
 
     void Awake()
     {
@@ -22,7 +22,7 @@ public class CM01_CAMERA_LERP : MonoBehaviour
         currentTimeLerp = 0;
     }
 
-    void LerpProcess()
+    public bool LerpProcess()
     {
         float t = currentTimeLerp / maxLerpTime;
 
@@ -37,10 +37,30 @@ public class CM01_CAMERA_LERP : MonoBehaviour
         if (currentTimeLerp >= maxLerpTime)
         {
             currentTimeLerp = 0;
+            return true;
         }
         else
         {
             currentTimeLerp += Time.deltaTime;
+            return false;
         }
+    }
+
+    public void SetMovementMiddle()
+    {
+        start = transform.position;
+        end = middlePointTranform.position;
+    }
+
+    public void SetMovmentRight()
+    {
+        start = transform.position;
+        end = rightPointTranform.position;
+    }
+
+    public void SetMovmentLeft()
+    {
+        start = transform.position;
+        end = leftPointTranform.position;
     }
 }

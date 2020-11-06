@@ -40,8 +40,14 @@ public class CT05_UI_MOUSE_RECT : MonoBehaviour
 
     public void SetMouseClickFlag(bool flag)
     {
+        mouseOn = flag;
         mouseClick = flag;
     }
 
+    public void SetObjectActiveFlag(bool flag)
+    {
+        mouseOn = flag;
+        mouseClick = flag;
+    }
 
 }

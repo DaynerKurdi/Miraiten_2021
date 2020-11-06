@@ -13,57 +13,25 @@ public class CM00_CAMERA_MAIN : MonoBehaviour
         cameraViewRotation = GetComponent<CM02_CAMERA_ROTATION>();
     }
 
-    public void UpdateScript()
+    public bool UpdateScript()
     {
-       // cameraViewRotation.UpdateScript();
+        return cameraMovmentLerp.LerpProcess();
     }
 
-    public void SetCameraViewToDefult(SM00_SENCE_MANAGER.CAMERA_VIEW_STATE currentView )
+    public void SetCameraPositionToMiddle()
     {
-        switch (currentView)
-        {
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV00_MIDDLE_VIEW:
-                cameraViewRotation.SetMiddleViewOnDefault(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR00_DEFAULT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV01_RIGHT_VIEW:
-                cameraViewRotation.SetRightViewOnDefault(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR01_RIGHT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV02_LEFT_VIEW:
-                cameraViewRotation.SetLeftViewOnDefault(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR02_LEFT_ROTATION);
-                break;
-        }
+        cameraMovmentLerp.SetMovementMiddle();
     }
 
-    public void SetCameraViewToRight(SM00_SENCE_MANAGER.CAMERA_VIEW_STATE currentView)
+    public void SetCameraPositionToRight()
     {
-        switch (currentView)
-        {
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV00_MIDDLE_VIEW:
-                cameraViewRotation.SetRightViewOnDefault(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR00_DEFAULT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV01_RIGHT_VIEW:
-                cameraViewRotation.SetRightViewOnRight(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR01_RIGHT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV02_LEFT_VIEW:
-                cameraViewRotation.SetRightViewOnLeft(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR02_LEFT_ROTATION);
-                break;
-        }
+        cameraMovmentLerp.SetMovmentRight();
     }
 
-    public void SetCameraViewToLeft(SM00_SENCE_MANAGER.CAMERA_VIEW_STATE currentView)
+    public void SetCameraPositionLeft()
     {
-        switch (currentView)
-        {
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV00_MIDDLE_VIEW:
-                cameraViewRotation.SetLeftViewOnDefault(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR00_DEFAULT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV01_RIGHT_VIEW:
-                cameraViewRotation.SetLeftViewOnRight(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR01_RIGHT_ROTATION);
-                break;
-            case SM00_SENCE_MANAGER.CAMERA_VIEW_STATE.CV02_LEFT_VIEW:
-                cameraViewRotation.SetLeftViewOnLeft(CM02_CAMERA_ROTATION.CAMERA_VIEW_ROTATION.CVR02_LEFT_ROTATION);
-                break;
-        }
+        cameraMovmentLerp.SetMovmentLeft();
     }
+    
 }
 
