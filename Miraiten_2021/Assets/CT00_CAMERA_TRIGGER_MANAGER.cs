@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
 {
-    public Transform rightObjectTypeOne;
-    public Transform rightObjectTypeTwo;
-    public Transform leftObjectTypeOne;
-    public Transform leftObjectTypeTwo;
+    public Transform middleViewRightObject;
+    public Transform middleViewLeftObject;
+
+    public Transform rightViewLeftObject;
+    public Transform leftViewRightObject;
 
     [Space(10)]
 
-    public Transform rightObjectUiHolderOne;
-    public Transform rightObjectUiHolderTwo;
-    public Transform leftObjectUiHolderOne;
-    public Transform leftObjectUiHolderTwo;
+    public Transform rightUiHolderOne;
+    public Transform rightUiHolderTwo;
+    public Transform leftUiHolderOne;
+    public Transform leftUiHolderTwo;
 
     [Space(10)]
     [SerializeField]
@@ -28,25 +29,22 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
     [SerializeField]
     Transform exitLeft;
 
-    [Space(10)]
-    [SerializeField]
     float currentLerpTime = 0;
-    [SerializeField]
     float maxLerpTime = 0.2f;
 
-    [Space(10)]
 
+    [Header("Middle View")]
     public CT05_UI_MOUSE_RECT middleViewRightTrigger;
     public CT05_UI_MOUSE_RECT middleViewLeftTrigger;
 
-    [Space(10)]
 
+    [Header("Right View")]
     public CT05_UI_MOUSE_RECT rightViewBodyTrigger;
     public CT05_UI_MOUSE_RECT rightViewTopTrigger;
     public CT05_UI_MOUSE_RECT rightViewBottomTrigger;
 
-    [Space(10)]
 
+    [Header("Left View")]
     public CT05_UI_MOUSE_RECT leftViewBodyTrigger;
     public CT05_UI_MOUSE_RECT leftViewTopTrigger;
     public CT05_UI_MOUSE_RECT leftViewBottomTrigger;
@@ -66,17 +64,16 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
     {
         currentLerpTime = 0;
 
-        rightObjectTypeTwo.gameObject.SetActive(false);
-        leftObjectTypeTwo.gameObject.SetActive(false);
+        SetRightViewObjectActiveFlag(false);
+        SetLeftViewObjectActiveFlag(false);
 
-        rightObjectTypeOne.gameObject.SetActive(true);
-        leftObjectTypeOne.gameObject.SetActive(true);
+        SetMiddleViewObjectsActiveFlag(true);
 
-        rightObjectUiHolderOne.position = exitRight.position;
-        leftObjectUiHolderOne.position = exitLeft.position;
+        rightUiHolderOne.position = exitRight.position;
+        leftUiHolderOne.position = exitLeft.position;
 
-        rightObjectUiHolderTwo.position = exitRight.position;
-        leftObjectUiHolderTwo.position = exitLeft.position;
+        rightUiHolderTwo.position = exitRight.position;
+        leftUiHolderTwo.position = exitLeft.position;
     }
 
 
@@ -86,22 +83,22 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
         {
             case UI_POSITION_OBJECT_BUTTON.UPOB00_MIDDLE_VIEW_RIGHT:
                 {
-                    return LerpObject(ref rightObjectUiHolderOne, exitRight.position, enterRight.position);
+                    return LerpObject(ref rightUiHolderOne, exitRight.position, enterRight.position);
                 }
 
             case UI_POSITION_OBJECT_BUTTON.UPOB01_MIDDLE_VIEW_LEFT:
                 {
-                    return LerpObject(ref leftObjectUiHolderOne, exitLeft.position, enterLeft.position);
+                    return LerpObject(ref leftUiHolderOne, exitLeft.position, enterLeft.position);
                 }
 
             case UI_POSITION_OBJECT_BUTTON.UPOB03_RIGHT_VIEW_LEFT:
                 {
-                    return LerpObject(ref leftObjectUiHolderTwo, exitLeft.position, enterLeft.position);
+                    return LerpObject(ref leftUiHolderTwo, exitLeft.position, enterLeft.position);
                 }
 
             case UI_POSITION_OBJECT_BUTTON.UPOB04_LEFT_VIEW_RIGHT:
                 {
-                    return LerpObject(ref rightObjectUiHolderTwo, exitRight.position, enterRight.position);
+                    return LerpObject(ref rightUiHolderTwo, exitRight.position, enterRight.position);
                 }
         }
 
@@ -114,19 +111,19 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
         {
             case UI_POSITION_OBJECT_BUTTON.UPOB00_MIDDLE_VIEW_RIGHT:
                 {
-                    return LerpObject(ref rightObjectUiHolderOne, enterRight.position, exitRight.position);
+                    return LerpObject(ref rightUiHolderOne, enterRight.position, exitRight.position);
                 }
             case UI_POSITION_OBJECT_BUTTON.UPOB01_MIDDLE_VIEW_LEFT:
                 {
-                    return LerpObject(ref leftObjectUiHolderOne, enterLeft.position, exitLeft.position);
+                    return LerpObject(ref leftUiHolderOne, enterLeft.position, exitLeft.position);
                 }
             case UI_POSITION_OBJECT_BUTTON.UPOB03_RIGHT_VIEW_LEFT:
                 {
-                    return LerpObject(ref leftObjectUiHolderTwo, enterLeft.position, exitLeft.position);
+                    return LerpObject(ref leftUiHolderTwo, enterLeft.position, exitLeft.position);
                 }
             case UI_POSITION_OBJECT_BUTTON.UPOB04_LEFT_VIEW_RIGHT:
                 {
-                    return LerpObject(ref rightObjectUiHolderTwo, enterRight.position, exitRight.position);
+                    return LerpObject(ref rightUiHolderTwo, enterRight.position, exitRight.position);
                 }
         }
 
@@ -157,42 +154,147 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
         }
     }
 
-    public void SetRightObjectTypeOneFlag(bool flag)
+    #region Active Object Flag
+    public void SetMiddleViewObjectsActiveFlag(bool flag)
     {
-        rightObjectTypeOne.gameObject.SetActive(flag);
+        middleViewRightObject.gameObject.SetActive(flag);
+        middleViewLeftObject.gameObject.SetActive(flag);
     }
 
-    public void SetLeftObjectTypeOneFlag(bool flag)
+    public void SetMiddleViewRightObjectActiveFlag(bool flag)
     {
-        leftObjectTypeOne.gameObject.SetActive(flag);
+        middleViewRightObject.gameObject.SetActive(flag);
     }
 
-    public void SetRightObjectTypeTwoFlag(bool flag)
+    public void SetMiddleViewObjectLeftViewActiveFlag(bool flag)
     {
-        rightObjectTypeTwo.gameObject.SetActive(flag);
+        middleViewLeftObject.gameObject.SetActive(flag);
     }
 
-    public void SetLeftObjectTypeTwoFlag(bool flag)
+    public void SetRightViewObjectActiveFlag(bool flag)
     {
-        leftObjectTypeTwo.gameObject.SetActive(flag);
+        rightViewLeftObject.gameObject.SetActive(flag);
+
+        rightViewBodyTrigger.gameObject.SetActive(flag);
+        rightViewTopTrigger.gameObject.SetActive(flag);
+        rightViewBottomTrigger.gameObject.SetActive(flag);
     }
 
-    public void CheckMiddleViewTrigger(out bool rightTrigger, out bool leftTrigger)
+    public void SetLeftViewObjectActiveFlag(bool flag)
+    {
+        leftViewRightObject.gameObject.SetActive(flag);
+
+        leftViewBodyTrigger.gameObject.SetActive(flag);
+        leftViewTopTrigger.gameObject.SetActive(flag);
+        leftViewBottomTrigger.gameObject.SetActive(flag);
+    }
+    #endregion
+
+    #region Active Trigger Flag
+
+    #region Set Mouse Flag
+    public void SetMiddleViewMouseAllFlag(bool flag)
+    {
+        middleViewRightTrigger.SetMouseClickFlag(flag);
+        middleViewRightTrigger.SetMouseOnFlag(flag);
+
+        middleViewLeftTrigger.SetMouseClickFlag(flag);
+        middleViewLeftTrigger.SetMouseOnFlag(flag);
+    }
+
+    public void SetMiddleViewRightMouseClickFlag(bool flag)
+    {
+        middleViewRightTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetMiddleViewLeftMouseClickFlag(bool flag)
+    {
+        middleViewLeftTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetRightViewAllMouseClickFlag(bool flag)
+    {
+        rightViewTopTrigger.SetMouseClickFlag(flag);
+        rightViewBottomTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetRightViewTopMouseClickFlag(bool flag)
+    {
+        rightViewTopTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetRightViewBottomMouseClickFlag(bool flag)
+    {
+        rightViewBottomTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetLeftViewAllMouseClickFlag(bool flag)
+    {
+        leftViewTopTrigger.SetMouseClickFlag(flag);
+        leftViewBottomTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetLeftViewTopMouseClickFlag(bool flag)
+    {
+        leftViewTopTrigger.SetMouseClickFlag(flag);
+    }
+
+    public void SetLeftViewBottomMouseClickFlag(bool flag)
+    {
+        leftViewBottomTrigger.SetMouseClickFlag(flag);
+    }
+    #endregion
+
+    #region Set Mouse Enter Flag
+    public void SetMiddleViewAllEnterFlag(bool flag)
+    {
+        middleViewRightTrigger.SetMouseOnFlag(flag);
+        middleViewLeftTrigger.SetMouseOnFlag(flag);
+    }
+
+    public void SetMiddleViewRightEnterFlag(bool flag)
+    {
+        middleViewRightTrigger.SetMouseOnFlag(flag);
+    }
+
+    public void SetMiddleViewLeftEnterFlag(bool flag)
+    {
+        middleViewLeftTrigger.SetMouseOnFlag(flag);
+    }
+
+    public void SetRightViewEnterFlag(bool flag)
+    {
+        rightViewBodyTrigger.SetMouseOnFlag(flag);
+    }
+
+    public void SetLeftViewEnterFlag(bool flag)
+    {
+        leftViewBodyTrigger.SetMouseOnFlag(flag);
+    }
+    #endregion
+    #endregion
+
+    #region Check Trigger Enter
+
+    public void CheckMiddleViewEnterTrigger(out bool rightTrigger, out bool leftTrigger)
     {
         rightTrigger = middleViewRightTrigger.GetMouseOnTrigger();
         leftTrigger = middleViewLeftTrigger.GetMouseOnTrigger();
     }
 
-    public void CheckRightViewBodyTrigger(out bool checkTrigger)
+    public void CheckRightViewBodyEnterTrigger(out bool checkTrigger)
     {
         checkTrigger = rightViewBodyTrigger.GetMouseOnTrigger();
     }
 
-    public void CheckLeftViewBodyTrigger(out bool checkTrigger)
+    public void CheckLeftViewBodyEnterTrigger(out bool checkTrigger)
     {
         checkTrigger = leftViewBodyTrigger.GetMouseOnTrigger();
     }
-   
+
+    #endregion
+
+    #region Mouse Click 
     public bool GetMiddleViewRightClickFlag()
     {
         return middleViewRightTrigger.GetMouseClickTrigger();
@@ -223,58 +325,6 @@ public class CT00_CAMERA_TRIGGER_MANAGER : MonoBehaviour
         return leftViewBottomTrigger.GetMouseClickTrigger();
     }
 
-    public void SetMiddleViewRightClickFlag(bool flag)
-    {
-        middleViewRightTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetMiddleViewLeftClickFlag(bool flag)
-    {
-        middleViewLeftTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetRightViewTopClickFlag(bool flag)
-    {
-        rightViewTopTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetRightViewBottomClickFlag(bool flag)
-    {
-        rightViewBottomTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetLeftViewTopClickFlag(bool flag)
-    {
-        leftViewTopTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetLeftViewBottomClickFlag(bool flag)
-    {
-        leftViewBottomTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetMiddleViewRightActiveFlag(bool flag)
-    {
-        middleViewRightTrigger.SetObjectActiveFlag(flag);
-    }
-
-    public void SetMiddleViewLeftActiveFlag(bool flag)
-    {
-        middleViewLeftTrigger.SetObjectActiveFlag(flag);
-    }
-
-    public void SetRightViewActiveFlag(bool flag)
-    {
-        leftObjectTypeTwo.gameObject.SetActive(flag);
-    }
-
-    public void SetRightBodyFlag(bool flag)
-    {
-        rightViewBodyTrigger.SetMouseClickFlag(flag);
-    }
-
-    public void SetLeftBodyFlag(bool flag)
-    {
-        leftViewBodyTrigger.SetMouseClickFlag(flag);
-    }
+    #endregion
+    
 }

@@ -90,7 +90,7 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
         bool checkRight = false;
         bool checkLeft = false;
 
-        cameraTriggerManager.CheckMiddleViewTrigger(out checkRight, out checkLeft);
+        cameraTriggerManager.CheckMiddleViewEnterTrigger(out checkRight, out checkLeft);
 
         CheckMiddleRight(ref checkRight);
         CheckMiddleLeft(ref checkLeft);
@@ -100,7 +100,7 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
     {
         bool checkBody = false;
 
-        cameraTriggerManager.CheckRightViewBodyTrigger(out checkBody);
+        cameraTriggerManager.CheckRightViewBodyEnterTrigger(out checkBody);
 
         CheckRightViewBody(ref checkBody);
     }
@@ -109,7 +109,7 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
     {
         bool checkBody = false;
 
-        cameraTriggerManager.CheckLeftViewBodyTrigger(out checkBody);
+        cameraTriggerManager.CheckLeftViewBodyEnterTrigger(out checkBody);
 
         CheckLeftViewBody(ref checkBody);
     }
@@ -134,7 +134,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 if (cameraTriggerManager.GetMiddleViewRightClickFlag())
                 {
                     cameraMainManager.SetCameraPositionToRight();
-                    cameraTriggerManager.SetMiddleViewRightClickFlag(false);
+                    cameraTriggerManager.SetMiddleViewRightMouseClickFlag(false);
+
                     nextViewState = CAMERA_VIEW_STATE.CV01_RIGHT_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
                     lerpProcess = CAMERA_VIEW_LERP_PROCESS.CVLP00_DO_MIDDLE_VIEW_R;
@@ -176,7 +177,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 if (cameraTriggerManager.GetMiddleViewLeftClickFlag())
                 {
                     cameraMainManager.SetCameraPositionLeft();
-                    cameraTriggerManager.SetMiddleViewLeftClickFlag(false);
+                    cameraTriggerManager.SetMiddleViewLeftMouseClickFlag(false);
+
                     nextViewState = CAMERA_VIEW_STATE.CV02_LEFT_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
                     lerpProcess = CAMERA_VIEW_LERP_PROCESS.CVLP01_DO_MIDDLE_VIEW_L;
@@ -215,8 +217,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
             {
                 if (cameraTriggerManager.GetRightViewTopClickFlag())
                 {
-                    cameraTriggerManager.SetLeftViewTopClickFlag(false);
                     cameraMainManager.SetCameraPositionToMiddle();
+                    cameraTriggerManager.SetRightViewTopMouseClickFlag(false);
 
                     nextViewState = CAMERA_VIEW_STATE.CV00_MIDDLE_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
@@ -224,13 +226,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 }
                 else if (cameraTriggerManager.GetRightViewBottomClickFlag())
                 {
-                    cameraTriggerManager.SetLeftViewBottomClickFlag(false);
-                    cameraTriggerManager.SetRightViewBottomClickFlag(false);
-
-                    cameraTriggerManager.SetRightBodyFlag(false);
-                    cameraTriggerManager.SetLeftBodyFlag(false);
-
                     cameraMainManager.SetCameraPositionLeft();
+                    cameraTriggerManager.SetRightViewBottomMouseClickFlag(false);
 
                     nextViewState = CAMERA_VIEW_STATE.CV02_LEFT_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
@@ -275,8 +272,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
             {
                 if (cameraTriggerManager.GetLeftViewTopClickFlag())
                 {
-                    cameraTriggerManager.SetRightViewTopClickFlag(false);
                     cameraMainManager.SetCameraPositionToMiddle();
+                    cameraTriggerManager.SetLeftViewTopMouseClickFlag(false);
 
                     nextViewState = CAMERA_VIEW_STATE.CV00_MIDDLE_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
@@ -284,13 +281,8 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 }
                 else if (cameraTriggerManager.GetLeftViewBottomClickFlag())
                 {
-                    cameraTriggerManager.SetLeftViewBottomClickFlag(false);
-                    cameraTriggerManager.SetRightViewBottomClickFlag(false);
-
-                    cameraTriggerManager.SetRightBodyFlag(false);
-                    cameraTriggerManager.SetLeftBodyFlag(false);
-
                     cameraMainManager.SetCameraPositionToRight();
+                    cameraTriggerManager.SetLeftViewBottomMouseClickFlag(false);
 
                     nextViewState = CAMERA_VIEW_STATE.CV01_RIGHT_VIEW;
                     cameraViewState = CAMERA_VIEW_STATE.CV03_LERP_PROCESS;
@@ -323,11 +315,11 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB00_MIDDLE_VIEW_RIGHT))
                     {
-                        cameraTriggerManager.SetMiddleViewRightActiveFlag(false);
-                        cameraTriggerManager.SetRightObjectTypeOneFlag(false);
-                        cameraTriggerManager.SetLeftObjectTypeOneFlag(false);
+                        cameraTriggerManager.SetMiddleViewRightEnterFlag(false);
+                        cameraTriggerManager.SetMiddleViewObjectsActiveFlag(false);
 
-                        cameraTriggerManager.SetLeftObjectTypeTwoFlag(true);
+                        cameraTriggerManager.SetRightViewObjectActiveFlag(true);
+
                         mouseOnRight = false;
                         enterLerpIsDone = false;
                     }
@@ -337,11 +329,10 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB01_MIDDLE_VIEW_LEFT))
                     {
-                        cameraTriggerManager.SetMiddleViewLeftActiveFlag(false);
-                        cameraTriggerManager.SetRightObjectTypeOneFlag(false);
-                        cameraTriggerManager.SetLeftObjectTypeOneFlag(false);
+                        cameraTriggerManager.SetMiddleViewLeftEnterFlag(false);
+                        cameraTriggerManager.SetMiddleViewObjectsActiveFlag(false);
 
-                        cameraTriggerManager.SetRightObjectTypeTwoFlag(true);
+                        cameraTriggerManager.SetLeftViewObjectActiveFlag(true);
 
                         mouseOnLeft = false;
                         enterLerpIsDone = false;
@@ -352,11 +343,10 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB03_RIGHT_VIEW_LEFT))
                     {
-                        cameraTriggerManager.SetLeftViewTopClickFlag(false);
-                        cameraTriggerManager.SetLeftObjectTypeTwoFlag(false);
+                        cameraTriggerManager.SetRightViewEnterFlag(false);
+                        cameraTriggerManager.SetRightViewObjectActiveFlag(false);
 
-                        cameraTriggerManager.SetRightObjectTypeOneFlag(true);
-                        cameraTriggerManager.SetLeftObjectTypeOneFlag(true);
+                        cameraTriggerManager.SetMiddleViewObjectsActiveFlag(true);
 
                         mouseOnRightViewLeftSide = false;
                         enterLerpIsDone = false;
@@ -367,14 +357,10 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB03_RIGHT_VIEW_LEFT))
                     {
-                        cameraTriggerManager.SetLeftViewBottomClickFlag(false);
+                        cameraTriggerManager.SetRightViewEnterFlag(false);
+                        cameraTriggerManager.SetRightViewObjectActiveFlag(false);
 
-                        cameraTriggerManager.SetRightObjectTypeTwoFlag(true);
-                        cameraTriggerManager.SetLeftObjectTypeTwoFlag(false);
-
-                        cameraTriggerManager.SetRightBodyFlag(false);
-                        cameraTriggerManager.SetLeftBodyFlag(false);
-
+                        cameraTriggerManager.SetLeftViewObjectActiveFlag(true);
 
                         mouseOnRightViewLeftSide = false;
                         enterLerpIsDone = false;
@@ -385,11 +371,10 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB04_LEFT_VIEW_RIGHT))
                     {
-                        cameraTriggerManager.SetRightViewTopClickFlag(false);
-                        cameraTriggerManager.SetLeftObjectTypeTwoFlag(false);
+                        cameraTriggerManager.SetLeftViewEnterFlag(false);
+                        cameraTriggerManager.SetLeftViewObjectActiveFlag(false);
 
-                        cameraTriggerManager.SetRightObjectTypeOneFlag(true);
-                        cameraTriggerManager.SetLeftObjectTypeOneFlag(true);
+                        cameraTriggerManager.SetMiddleViewObjectsActiveFlag(true);
 
                         mouseOnLeftViewRightSide = false;
                         enterLerpIsDone = false;
@@ -400,13 +385,10 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 {
                     if (cameraTriggerManager.ExitObject(CT00_CAMERA_TRIGGER_MANAGER.UI_POSITION_OBJECT_BUTTON.UPOB04_LEFT_VIEW_RIGHT))
                     {
-                        cameraTriggerManager.SetLeftViewBottomClickFlag(false);
-                        cameraTriggerManager.SetRightObjectTypeTwoFlag(false);
+                        cameraTriggerManager.SetLeftViewEnterFlag(false);
+                        cameraTriggerManager.SetLeftViewObjectActiveFlag(false);
 
-                        cameraTriggerManager.SetRightBodyFlag(false);
-                        cameraTriggerManager.SetLeftBodyFlag(false);
-
-                        cameraTriggerManager.SetLeftObjectTypeTwoFlag(true);
+                        cameraTriggerManager.SetRightViewObjectActiveFlag(true);
 
                         mouseOnLeftViewRightSide = false;
                         enterLerpIsDone = false;
@@ -414,7 +396,6 @@ public class SM00_SENCE_MANAGER : MonoBehaviour
                 }
                 break;
         }
-
 
         if (cameraMainManager.UpdateScript())
         {
